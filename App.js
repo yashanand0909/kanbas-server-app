@@ -32,7 +32,19 @@ const sessionOptions = {
       domain: process.env.HTTP_SERVER_DOMAIN,
     };
   }
-  app.use(session(sessionOptions));  
+  app.use(
+      session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: false,
+        proxy: true,
+        cookie: {
+          sameSite: "none",
+          secure: true,
+          domain: "kanbas-server-app-2.onrender.com",
+        },
+      })
+    );
 
 AssignmentRoutes(app);
 ModuleRoutes(app);
